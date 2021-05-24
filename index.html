@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Puah_Hock_Leng@ite.edu.sg">
+    <title>FAS Calculator</title>
+
+
+
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+
+    <style>
+ 
+    </style>
+
+  </head>
+  <body class="bg-light">
+    
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      
+      <h2>Financial Assistance Calculator</h2>
+      <p class="lead">Key in your family gross monthly household income and number of family members including yourself.</p>
+    </div>
+
+    <div class="row">
+      
+
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Your details</h4>
+        <form onsubmit="return showResults()">
+          <div class="row g-3">
+            <div>
+              <input type="text" pattern="\d+" class="form-control" id="income" placeholder="Family gross monthly household income" required="">
+            </div>
+
+          </div>
+
+          <div class="row g-3">
+            <div>
+              <input type="text" pattern="\d+" class="form-control" id="number2" placeholder="Number of family members including yourself" required="">
+            </div>
+          </div>
+          <div class="row g-3">
+            <div></div>
+              
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-5 col-lg-4 order-md-last" id="results" style="display: none;">
+      <h4 class="mb-3">
+        <span class="text-primary">You are eligible for</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+          <div>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">FAS Scheme</th>
+                  <th scope="col">Amount</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td id="scheme">HEC Bursary</td>
+                  <td id="schemeAmt">$1500</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+        </li>
+        
+      </ul>
+    </div>
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1"></p>
+
+  </footer>
+</div>
+
+
+ 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script>
+  var inputIncome = document.getElementById('income');
+  var inputNumber = document.getElementById('number2');
+
+  inputIncome.oninvalid = function(event) {
+    alert("Inputs should only number.");
+  }
+
+  inputNumber.oninvalid = function(event) {
+    alert("Inputs should only number.");
+  }
+
+  // Calculation
+  function showResults() {
+    var grossIncome = inputIncome.value ;
+    var pci = grossIncome / inputNumber.value;
+    var msgScheme;
+    var msgSchemeAmt;
+    if (grossIncome< 2750 || pci < 690) {
+      msgScheme = "Higher Education Community Bursary";
+      msgSchemeAmt = "Nitec/ Higher Nitec: $1,500 and 100% tuition fee subsidy; TED: $2,750";
+    } else if(grossIncome <= 4000 || pci <= 1000){
+      msgScheme = "Higher Education Community Bursary";
+      msgSchemeAmt = "Nitec/ Higher Nitec: $1,250; TED: $2,400";
+    } else if(grossIncome <= 6900 || pci <= 1725){
+      msgScheme = "Higher Education Bursary";
+      msgSchemeAmt = "Nitec/ Higher Nitec: $600; TED: $1,900";
+    } else if(grossIncome <= 9000 || pci <= 2250){
+      msgScheme = "Higher Education Bursary";
+      msgSchemeAmt = "Nitec/ Higher Nitec: $400; TED: $850";
+    } else {
+      msgScheme = "None";
+      msgSchemeAmt = "$0";
+    }
+
+    // Display
+    var displayScheme = document.getElementById('scheme');
+    var displaySchemeAmt = document.getElementById('schemeAmt');
+    var idResults = document.getElementById('results');
+
+    displayScheme.value = msgScheme;
+    displaySchemeAmt.value = msgSchemeAmt;
+    idResults.style.display = "block";
+    return false;
+  }
+  
+
+</script>
+</body></html>
